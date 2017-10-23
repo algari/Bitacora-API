@@ -2,12 +2,19 @@
 
 const express = require('express')
 const gameCtrl = require('../controllers/game.controller')
+const userCtrl = require('../controllers/auth.controller')
+const auth = require('../middelwares/auth.mid')
 const api = express.Router();
 
-api.get('/game',gameCtrl.getGames);
-api.get('/game/:game_id',gameCtrl.getGame)
-api.post('/game',gameCtrl.createGame)
-api.put('/game/:game_id',gameCtrl.updateGame)
-api.delete('/game/:game_id',gameCtrl.deleteGame)
+api.get('/game',auth, gameCtrl.getGames);
+api.get('/game/:game_id',auth ,gameCtrl.getGame)
+api.post('/game',auth,gameCtrl.createGame)
+api.put('/game/:game_id',auth,gameCtrl.updateGame)
+api.delete('/game/:game_id',auth,gameCtrl.deleteGame)
+api.post('/singup',auth,userCtrl.singUp)
+api.post('singin',userCtrl.singIn)
+api.get('/private', auth,(req,res)=>{
+    res.status(200).send({message:'Tiene acceso'})
+});
 
 module.exports = api
