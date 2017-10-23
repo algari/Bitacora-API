@@ -19,10 +19,11 @@ function singUp(req,res){
 }
 function singIn(req,res){
     User.find({email: req.body.email},(err,user)=>{
+        
         if(err) return res.status(500).send({message: err})
-        if(!user) return res.status(404).send({message:'No existe el usuario'})
+        if(user.length==0) return res.status(404).send({message:'No existe el usuario'})
 
-        req.user = user
+        // req.body = user
         res.status(200).send({
             message:'Te has logueado correctamente :)',
             token: service.createToken(user)

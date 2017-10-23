@@ -12,7 +12,7 @@ api.post('/game',auth,gameCtrl.createGame)
 api.put('/game/:game_id',auth,gameCtrl.updateGame)
 api.delete('/game/:game_id',auth,gameCtrl.deleteGame)
 api.post('/singup',auth,userCtrl.singUp)
-api.post('singin',userCtrl.singIn)
+api.post('/singin',userCtrl.singIn)
 api.get('/private', auth,(req,res)=>{
     res.status(200).send({message:'Tiene acceso'})
 });
