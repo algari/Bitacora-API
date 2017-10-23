@@ -11,10 +11,9 @@ const UserShema = new Shema({
     username: {type:String, unique:true},
     password:{type:String, select:false},
     email: {type:String,unique:true},
-    remember_token: {type:String},
     api_token:{type:String},
     created_at: {type:Date, default:Date.now()},
-    updated_at: {type:Date},
+    updated_at: {type:Date, default:Date.now()},
     avatar:String
 })
 
