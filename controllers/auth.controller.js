@@ -24,7 +24,7 @@ function singIn(req,res){
         if(user.length==0) return res.status(404).send({message:'No existe el usuario'})
 
         // req.body = user
-        res.status(200).send({user:user[0],
+        res.status(200).send({name:user[0].name,
             message:'Te has logueado correctamente :)',
             token: service.createToken(user)
         })
