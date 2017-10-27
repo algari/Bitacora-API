@@ -8,7 +8,7 @@ function getGames(req,res){
         if(!games){
             return res.status(404).send({message:`No existen Juegos!`})
         }else{
-            res.status(200).send({games:games});
+            res.status(200).send(games);
         }
     })
 }
