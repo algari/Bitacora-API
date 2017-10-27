@@ -2,8 +2,6 @@
 
 const mongoose = require('mongoose');
 const shema = mongoose.Schema;
-const Symbol = require('./symbol')
-const Strategie = require('./Strategie')
 
 const GameShema = shema({
     date_in: String,

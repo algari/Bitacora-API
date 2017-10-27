@@ -1,3 +1,5 @@
+'use strict'
+
 const Game = require('../models/game');
 
 function getGames(req,res){
@@ -73,7 +75,7 @@ function deleteGame(req,res){
     let game_id = req.params.game_id;
     
     Game.findById(game_id,(err,game)=>{
-        if(err){
+        if(!err){
             return res.status(500).send({message:`Error al borrar el juego ${err}`})
         }
         game.remove(err=>{
