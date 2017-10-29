@@ -1,6 +1,7 @@
 'use strict'
 
 const Game = require('../models/game');
+const moment = require('moment');
 
 function getGames(req,res){
     Game.find({},(err,games)=>{
@@ -31,21 +32,19 @@ function getGame(req,res){
 }
 
 function createGame(req,res){
-    console.log('POST /api/game/');
-    console.log(req.body);
-
+    
     let game = new Game();
-    game.date_in = req.body.date_in;
+    game.date_in = moment(req.body.date_in).format('LLLL');
     game.quantity = req.body.quantity;
     game.type = req.body.type;
-    game.price_in = req.body.price_in;
+    game.price_in =  req.body.price_in;
     game.time_frame = req.body.time_frame;
     game.price_out = req.body.price_out;
-    game.date_out = req.body.date_out;
+    game.date_out = moment(req.body.date_out).format('LLLL');
     game.commission = req.body.commission;
     game.comments = req.body.comments;
     game.symbol = req.body.symbol;
-    game.strategie = req.body.strategie;
+    game.strategy = req.body.strategy;
     game.result = req.body.result;
     game.neto = req.body.neto;
     game.netoCmm = req.body.netoCmm;
@@ -75,7 +74,7 @@ function deleteGame(req,res){
     let game_id = req.params.game_id;
     
     Game.findById(game_id,(err,game)=>{
-        if(!err){
+        if(err){
             return res.status(500).send({message:`Error al borrar el juego ${err}`})
         }
         game.remove(err=>{

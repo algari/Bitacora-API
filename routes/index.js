@@ -2,8 +2,9 @@
 
 const express = require('express')
 const gameCtrl = require('../controllers/game.controller')
-const strategieCtrl = require('../controllers/strategie.controller')
+const strategyCtrl = require('../controllers/strategy.controller')
 const userCtrl = require('../controllers/auth.controller')
+const analysisCtrl = require('../controllers/analysis.controller')
 const auth = require('../middelwares/auth.mid')
 const api = express.Router();
 
@@ -15,11 +16,14 @@ api.put('/game/:game_id',auth,gameCtrl.updateGame)
 api.delete('/game/:game_id',auth,gameCtrl.deleteGame)
 
 //Strategies
-api.get('/strategie',auth, strategieCtrl.getStrategies);
-api.get('/strategie/:strategie_id',auth ,strategieCtrl.getStrategie)
-api.post('/strategie',auth,strategieCtrl.createStrategie)
-api.put('/strategie/:strategie_id',auth,strategieCtrl.updateStrategie)
-api.delete('/strategie/:strategie_id',auth,strategieCtrl.deleteStrategie)
+api.get('/strategies',auth, strategyCtrl.getStrategies);
+api.get('/strategy/:strategy_id',auth ,strategyCtrl.getStrategy)
+api.post('/strategy',auth,strategyCtrl.createStrategy)
+api.put('/strategy/:strategy_id',auth,strategyCtrl.updateStrategy)
+api.delete('/strategy/:strategy_id',auth,strategyCtrl.deleteStrategy)
+
+//Analysis
+api.get('/analysis/strategies',auth,analysisCtrl.strategiesAnalysis)
 
 //User
 api.post('/singup',auth,userCtrl.singUp)
