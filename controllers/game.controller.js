@@ -34,13 +34,13 @@ function getGame(req,res){
 function createGame(req,res){
     
     let game = new Game();
-    game.date_in = moment(req.body.date_in).format('LLLL');
+    game.date_in = moment(req.body.date_in).format('l h:mm:ss a');
     game.quantity = req.body.quantity;
     game.type = req.body.type;
     game.price_in =  req.body.price_in;
     game.time_frame = req.body.time_frame;
     game.price_out = req.body.price_out;
-    game.date_out = moment(req.body.date_out).format('LLLL');
+    game.date_out = moment(req.body.date_out).format('l h:mm:ss a');
     game.commission = req.body.commission;
     game.comments = req.body.comments;
     game.symbol = req.body.symbol;
