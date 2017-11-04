@@ -8,21 +8,28 @@ const moment = require('moment');
 function strategiesAnalysis(req,res){
     let date_in = moment(req.query.date_in).format('L') +' 12:00:00 AM';
     let date_out = moment(req.query.date_out).format('L') +' 11:59:00 PM'; 
-    console.log(date_in+" "+date_out)
-    Strategy.find({},(err,strategy)=>{
+    let username = req.query.username; 
+    console.log(date_in+" "+date_out+" "+username)
+    Strategy.find({username:username},(err,strategy)=>{
         if(err){
             return res.status(500).send({message:`Error al realizar la busqueda de las estrategias ${err}`})
         }
         if(!strategy){
             return res.status(404).send({message:`No existen Estrategias!`})
         }else{
-            Game.find({ $and: [{date_in:{$gte: date_in},date_out:{$lte:date_out}}]},(err,games)=>{
+            Game.find({ $and: [{
+                username:username,
+                date_in:{$gte: date_in},
+                date_out:{$lte:date_out},
+                }]
+                },(err,games)=>{
                 if(err){
                     return res.status(500).send({message:`Error al realizar la busqueda de los juegos ${err}`})
                 }
                 if(!games){
                     return res.status(404).send({message:`No existen Juegos!`})
                 }else{
+                    console.log(games);
                     const datasets = []
                     const labels = []
                     const valuesP = []

@@ -5,6 +5,7 @@ const shema = mongoose.Schema;
 
 const StrategyShema = shema({
     strategy: {type:String, unique:true},
+    username: String,
     description: String
 })
 

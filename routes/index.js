@@ -10,6 +10,7 @@ const api = express.Router();
 
 //Games
 api.get('/game',auth, gameCtrl.getGames);
+api.get('/gamebyusername/:username',auth, gameCtrl.getGamesByUsername);
 api.get('/gamebydates',auth,gameCtrl.getGamesByDates)
 api.get('/game/:game_id',auth ,gameCtrl.getGame)
 api.post('/game',auth,gameCtrl.createGame)
@@ -19,9 +20,11 @@ api.delete('/game/:game_id',auth,gameCtrl.deleteGame)
 //Strategies
 api.get('/strategies',auth, strategyCtrl.getStrategies);
 api.get('/strategy/:strategy_id',auth ,strategyCtrl.getStrategy)
+api.get('/strategybyusername/:username',auth ,strategyCtrl.getStrategyByUsername)
 api.post('/strategy',auth,strategyCtrl.createStrategy)
 api.put('/strategy/:strategy_id',auth,strategyCtrl.updateStrategy)
 api.delete('/strategy/:strategy_id',auth,strategyCtrl.deleteStrategy)
+
 
 //Analysis
 api.get('/analysis/strategies',auth,analysisCtrl.strategiesAnalysis)

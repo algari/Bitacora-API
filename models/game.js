@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const shema = mongoose.Schema;
 
 const GameShema = shema({
+    username:String,
     date_in: {type:Date},
     quantity: {type:Number,default:0},
     type:String,

@@ -16,18 +16,38 @@ function getGames(req,res){
     })
 }
 
-function getGamesByDates(req,res){
-    let date_in = moment(req.query.date_in).format('L') +' 12:00:00 AM';
-    let date_out = moment(req.query.date_out).format('L') +' 11:59:00 PM'; 
-    console.log(date_in+" "+date_out);
-    Game.find({ $and: [{date_in:{$gte: date_in},date_out:{$lte:date_out}}]},(err,games)=>{
+function getGamesByUsername(req,res){
+    let username = req.params.username;
+    Game.find({username:username},(err,games)=>{
         if(err){
             return res.status(500).send({message:`Error al realizar la busqueda de los juegos ${err}`})
         }
         if(!games){
             return res.status(404).send({message:`No existen Juegos!`})
         }else{
-            res.status(200).send({games});
+            res.status(200).send(games);
+        }
+    })
+}
+
+function getGamesByDates(req,res){
+    let date_in = moment(req.query.date_in).format('L') +' 12:00:00 AM';
+    let date_out = moment(req.query.date_out).format('L') +' 11:59:00 PM';
+    let username = req.query.username;  
+    console.log(date_in+" "+date_out);
+    Game.find({ $and: [{
+        username:username,
+        date_in:{$gte: date_in},
+        date_out:{$lte:date_out},
+        }]
+        },(err,games)=>{
+        if(err){
+            return res.status(500).send({message:`Error al realizar la busqueda de los juegos ${err}`})
+        }
+        if(!games){
+            return res.status(404).send({message:`No existen Juegos!`})
+        }else{
+            res.status(200).send(games);
         }
     })
 }
@@ -42,7 +62,7 @@ function getGame(req,res){
         if(!game){
             return res.status(404).send({message:`Juego no existe!`})
         }else{
-            return res.status(200).send({game:game})
+            return res.status(200).send(game)
         }
     })
 }
@@ -50,6 +70,7 @@ function getGame(req,res){
 function createGame(req,res){
     
     let game = new Game();
+    game.username = req.body.username;
     game.date_in = moment(req.body.date_in).format('l h:mm:ss a');
     game.quantity = req.body.quantity;
     game.type = req.body.type;
@@ -72,7 +93,7 @@ function createGame(req,res){
         if(err){
             res.status(500).send({message:`Error al guardar el juego ${err}`});
         }else{
-            res.status(200).send({game:gameStored}); 
+            res.status(200).send(gameStored); 
         }
     })
 }
@@ -85,7 +106,7 @@ function updateGame(req,res){
         if(err){
             return res.status(500).send({message:`Error al actulaizar el juego  ${err}`})
         }else{
-            res.status(200).send({gameUpdated:gameUpdated}); 
+            res.status(200).send(gameUpdated); 
         }
     })
 }
@@ -113,7 +134,8 @@ module.exports = {
     createGame,
     getGame,
     getGames,
-    getGamesByDates
+    getGamesByDates,
+    getGamesByUsername
 }
     
     
