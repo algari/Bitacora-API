@@ -8,7 +8,11 @@ function singUp(req,res){
         name: req.body.name,
         username: req.body.username,
         email: req.body.email,
-        password : req.body.password
+        password : req.body.password,
+        r:req.body.r,
+        max_loss:req.body.max_loss,
+        max_loss_w:req.body.max_loss_w,
+        goal_w:goal_w,
     })
 
     user.save((err)=>{
@@ -24,10 +28,10 @@ function singIn(req,res){
         if(user.length==0) return res.status(404).send({message:'No existe el usuario'})
 
         // req.body = user
-        res.status(200).send({name:user[0].name,
-            message:'Te has logueado correctamente :)',
+        res.status(200).send(
+            {user,           
             token: service.createToken(user)
-        })
+            })
     })
 }
 

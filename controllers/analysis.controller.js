@@ -3,11 +3,12 @@
 const Strategy = require('../models/strategy');
 const Game = require('../models/game');
 const conf = require('../config')
+const moment = require('moment');
 
 function strategiesAnalysis(req,res){
-    let date_in = req.query.date_in;
-    let date_out = req.query.date_out;
-
+    let date_in = moment(req.query.date_in).format('L') +' 12:00:00 AM';
+    let date_out = moment(req.query.date_out).format('L') +' 11:59:00 PM'; 
+    console.log(date_in+" "+date_out)
     Strategy.find({},(err,strategy)=>{
         if(err){
             return res.status(500).send({message:`Error al realizar la busqueda de las estrategias ${err}`})
@@ -15,7 +16,7 @@ function strategiesAnalysis(req,res){
         if(!strategy){
             return res.status(404).send({message:`No existen Estrategias!`})
         }else{
-            Game.find({date_in:{$gte: date_in},date_out:{$lte:date_out}},(err,games)=>{
+            Game.find({ $and: [{date_in:{$gte: date_in},date_out:{$lte:date_out}}]},(err,games)=>{
                 if(err){
                     return res.status(500).send({message:`Error al realizar la busqueda de los juegos ${err}`})
                 }

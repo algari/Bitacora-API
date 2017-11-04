@@ -16,6 +16,22 @@ function getGames(req,res){
     })
 }
 
+function getGamesByDates(req,res){
+    let date_in = moment(req.query.date_in).format('L') +' 12:00:00 AM';
+    let date_out = moment(req.query.date_out).format('L') +' 11:59:00 PM'; 
+    console.log(date_in+" "+date_out);
+    Game.find({ $and: [{date_in:{$gte: date_in},date_out:{$lte:date_out}}]},(err,games)=>{
+        if(err){
+            return res.status(500).send({message:`Error al realizar la busqueda de los juegos ${err}`})
+        }
+        if(!games){
+            return res.status(404).send({message:`No existen Juegos!`})
+        }else{
+            res.status(200).send({games});
+        }
+    })
+}
+
 function getGame(req,res){
     let game_id = req.params.game_id;
     
@@ -48,6 +64,10 @@ function createGame(req,res){
     game.result = req.body.result;
     game.neto = req.body.neto;
     game.netoCmm = req.body.netoCmm;
+    game.r = req.body.r;
+    game.source = req.body.source;
+    game.followed = req.body.followed;
+    
     game.save((err,gameStored)=>{
         if(err){
             res.status(500).send({message:`Error al guardar el juego ${err}`});
@@ -92,7 +112,8 @@ module.exports = {
     updateGame,
     createGame,
     getGame,
-    getGames
+    getGames,
+    getGamesByDates
 }
     
     
