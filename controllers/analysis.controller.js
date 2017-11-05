@@ -41,7 +41,7 @@ function strategiesAnalysis(req,res){
                         var contN = 0;
                         var contB = 0;
                         games.forEach(function(game){
-                            if(game.strategy==str.strategy){
+                            if(game.strategy==str._id){
                                 if(game.result==conf.RESULT_GAME_BREAK_EVEN){
                                     contB ++;
                                 }else if(game.result==conf.RESULT_GAME_POSITIVE){
