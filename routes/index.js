@@ -3,6 +3,8 @@
 const express = require('express')
 const gameCtrl = require('../controllers/game.controller')
 const strategyCtrl = require('../controllers/strategy.controller')
+const sourceCtrl = require('../controllers/source.controller')
+const tagCtrl = require('../controllers/tag.controller')
 const userCtrl = require('../controllers/auth.controller')
 const analysisCtrl = require('../controllers/analysis.controller')
 const auth = require('../middelwares/auth.mid')
@@ -24,6 +26,22 @@ api.get('/strategybyusername/:username',auth ,strategyCtrl.getStrategyByUsername
 api.post('/strategy',auth,strategyCtrl.createStrategy)
 api.put('/strategy/:strategy_id',auth,strategyCtrl.updateStrategy)
 api.delete('/strategy/:strategy_id',auth,strategyCtrl.deleteStrategy)
+
+//Source
+api.get('/sources',auth, sourceCtrl.getSources);
+api.get('/source/:source_id',auth ,sourceCtrl.getSource)
+api.get('/sourcebyusername/:username',auth ,sourceCtrl.getSourceByUsername)
+api.post('/source',auth,sourceCtrl.createSource)
+api.put('/source/:source_id',auth,sourceCtrl.updateSource)
+api.delete('/source/:source_id',auth,sourceCtrl.deleteSource)
+
+//Tags
+api.get('/tags',auth, tagCtrl.getTags);
+api.get('/tag/:tag_id',auth ,tagCtrl.getTag)
+api.get('/tagbyusername/:username',auth ,tagCtrl.getTagByUsername)
+api.post('/tag',auth,tagCtrl.createTag)
+api.put('/tag/:tag_id',auth,tagCtrl.updateTag)
+api.delete('/tag/:tag_id',auth,tagCtrl.deleteTag)
 
 
 //Analysis
