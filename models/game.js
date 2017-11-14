@@ -5,23 +5,26 @@ const shema = mongoose.Schema;
 
 const GameShema = shema({
     username:String,
-    date_in: {type:Date},
-    quantity: {type:Number,default:0},
+    symbol:{type:String},
     type:String,
-    price_in: {type:Number,default:0},
     time_frame: String,
-    price_out: {type:Number,default:0},
-    date_out: {type:Date},
+    strategy: {type:String},
+    source:String,
     commission: {type:Number,default:0},
     comments: String,
-    symbol:{type:String},
-    strategy: {type:String},
     result:String,
     neto: {type:Number,default:0},
     netoCmm:{type:Number,default:0},
     r: {type:Number,default:0},
-    source:String,
-    followed:String
+    netoR: {type:Number,default:0},
+    percentCaptured: {type:Number,default:0},
+    followed:String,
+    chart:String,
+    maxMove:{type:Number,default:0},
+    tags:[],
+    entries:[],
+    exits:[],
+    status:String
 })
 
 module.exports = mongoose.model('Game',GameShema);

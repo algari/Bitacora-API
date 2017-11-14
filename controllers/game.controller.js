@@ -71,24 +71,27 @@ function createGame(req,res){
     
     let game = new Game();
     game.username = req.body.username;
-    game.date_in = moment(req.body.date_in).format('l h:mm:ss a');
-    game.quantity = req.body.quantity;
+    game.symbol = req.body.symbol;
     game.type = req.body.type;
-    game.price_in =  req.body.price_in;
     game.time_frame = req.body.time_frame;
-    game.price_out = req.body.price_out;
-    game.date_out = moment(req.body.date_out).format('l h:mm:ss a');
+    game.strategy = req.body.strategy;
+    game.source = req.body.source;
     game.commission = req.body.commission;
     game.comments = req.body.comments;
-    game.symbol = req.body.symbol;
-    game.strategy = req.body.strategy;
     game.result = req.body.result;
     game.neto = req.body.neto;
     game.netoCmm = req.body.netoCmm;
     game.r = req.body.r;
-    game.source = req.body.source;
+    game.netoR = req.body.netoR;
+    game.percentCaptured = req.body.percentCaptured;
     game.followed = req.body.followed;
-    
+    game.chart = req.body.chart;
+    game.maxMove = req.body.maxMove;
+    game.tags = req.body.tags;
+    game.entries = req.body.entries;
+    game.exits = req.body.exits;
+    game.status = req.body.status;
+
     game.save((err,gameStored)=>{
         if(err){
             res.status(500).send({message:`Error al guardar el juego ${err}`});
