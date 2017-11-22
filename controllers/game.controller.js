@@ -17,17 +17,39 @@ function getGames(req,res){
 }
 
 function getGamesByUsername(req,res){
-    let username = req.params.username;
-    Game.find({username:username},(err,games)=>{
-        if(err){
-            return res.status(500).send({message:`Error al realizar la busqueda de los juegos ${err}`})
-        }
-        if(!games){
-            return res.status(404).send({message:`No existen Juegos!`})
-        }else{
-            res.status(200).send(games);
-        }
-    })
+    let username = req.query.username;
+    if (req.query.date_in && req.query.date_out) {
+        let date_in = moment(req.query.date_in).format('L') +' 12:00:00 AM';
+        let date_out = moment(req.query.date_out).format('L') +' 11:59:00 PM';
+        console.log(date_in,date_out,username)
+        Game.find({ $and: [{
+            username:username,
+            date_in:{$gte: date_in},
+            date_out:{$lte:date_out},
+            }]
+            },(err,games)=>{
+                if(err){
+                    return res.status(500).send({message:`Error al realizar la busqueda de los juegos ${err}`})
+                }
+                if(!games){
+                    return res.status(404).send({message:`No existen Juegos!`})
+                }else{
+                    res.status(200).send(games);
+                }
+            })     
+    }else{
+        Game.find({username:username},(err,games)=>{
+            if(err){
+                return res.status(500).send({message:`Error al realizar la busqueda de los juegos ${err}`})
+            }
+            if(!games){
+                return res.status(404).send({message:`No existen Juegos!`})
+            }else{
+                res.status(200).send(games);
+            }
+        })
+    }
+
 }
 
 function getGamesByDates(req,res){

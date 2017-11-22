@@ -12,7 +12,7 @@ const api = express.Router();
 
 //Games
 api.get('/game',auth, gameCtrl.getGames);
-api.get('/gamebyusername/:username',auth, gameCtrl.getGamesByUsername);
+api.get('/gamebyusername',auth, gameCtrl.getGamesByUsername);
 api.get('/gamebydates',auth,gameCtrl.getGamesByDates)
 api.get('/game/:game_id',auth ,gameCtrl.getGame)
 api.post('/game',auth,gameCtrl.createGame)
