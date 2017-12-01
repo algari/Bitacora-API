@@ -93,7 +93,7 @@ function createGame(req,res){
     
     let game = new Game();
     game.username = req.body.username;
-    game.symbol = req.body.symbol;
+    game.ticker = req.body.ticker;
     game.type = req.body.type;
     game.time_frame = req.body.time_frame;
     game.strategy = req.body.strategy;
@@ -106,7 +106,8 @@ function createGame(req,res){
     game.r = req.body.r;
     game.netoR = req.body.netoR;
     game.percentCaptured = req.body.percentCaptured;
-    game.followed = req.body.followed;
+    game.aon = req.body.aon;
+    game.aonr = req.body.aonr;
     game.chart = req.body.chart;
     game.maxMove = req.body.maxMove;
     game.tags = req.body.tags;

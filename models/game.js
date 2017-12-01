@@ -5,7 +5,7 @@ const shema = mongoose.Schema;
 
 const GameShema = shema({
     username:String,
-    symbol:{type:String},
+    ticker:{type:String},
     type:String,
     time_frame: String,
     strategy: {type:String},
@@ -18,7 +18,8 @@ const GameShema = shema({
     r: {type:Number,default:0},
     netoR: {type:Number,default:0},
     percentCaptured: {type:Number,default:0},
-    followed:String,
+    aon:{type:Number,default:0},
+    aonr:{type:Number,default:0},
     chart:String,
     maxMove:{type:Number,default:0},
     tags:[],
