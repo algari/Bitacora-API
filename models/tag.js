@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const shema = mongoose.Schema;
 
 const TagShema = shema({
-    tag: {type:String, unique:true},
+    tag: {type:String},
     username: String,
     description: String
 })

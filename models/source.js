@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 const shema = mongoose.Schema;
 
 const SourceShema = shema({
-    source: {type:String, unique:true},
+    source: {type:String},
     username: String,
 })
 

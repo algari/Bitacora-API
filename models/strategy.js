@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const shema = mongoose.Schema;
 
 const StrategyShema = shema({
-    strategy: {type:String, unique:true},
+    strategy: {type:String},
     username: String,
     description: String
 })
