@@ -25,7 +25,8 @@ const GameShema = shema({
     tags:[],
     entries:[],
     exits:[],
-    status:String
+    status:String,
+    created:Date
 })
 
 module.exports = mongoose.model('Game',GameShema);

@@ -18,14 +18,13 @@ function getGames(req,res){
 
 function getGamesByUsername(req,res){
     let username = req.query.username;
-    if (req.query.date_in && req.query.date_out) {
-        let date_in = moment(req.query.date_in).format('L') +' 12:00:00 AM';
-        let date_out = moment(req.query.date_out).format('L') +' 11:59:00 PM';
-        console.log(date_in,date_out,username)
+    if (req.query.initial && req.query.last) {
+        let initial = moment(req.query.initial).format('L') +' 12:00:00 AM';
+        let last = moment(req.query.last).format('L') +' 11:59:00 PM';
+        console.log(initial,last,username)
         Game.find({ $and: [{
             username:username,
-            date_in:{$gte: date_in},
-            date_out:{$lte:date_out},
+            created:{$gte: initial,$lte:last}
             }]
             },(err,games)=>{
                 if(err){
@@ -114,6 +113,7 @@ function createGame(req,res){
     game.entries = req.body.entries;
     game.exits = req.body.exits;
     game.status = req.body.status;
+    game.created = req.body.created;
 
     game.save((err,gameStored)=>{
         if(err){
