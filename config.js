@@ -6,7 +6,9 @@ module.exports ={
 
     RESULT_GAME_POSITIVE: 'Positive',
     RESULT_GAME_NEGATIVE: 'Negative',
-    RESULT_GAME_BREAK_EVEN: 'Break Even'
+    RESULT_GAME_BREAK_EVEN: 'Break Even',
+
+    GENERAL:'General'
 
 
 }

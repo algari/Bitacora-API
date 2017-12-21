@@ -1,6 +1,7 @@
 'use strict'
 
 const Tag = require('../models/tag');
+const conf = require('../config')
 
 function getTags(req,res){
     Tag.find({},(err,tag)=>{
@@ -76,7 +77,8 @@ function deleteTag(req,res){
 
 function getTagByUsername(req,res){
     let username = req.params.username;
-    Tag.find({username:username},(err,tag)=>{
+    //Tag.find({username:username},(err,tag)=>{
+    Tag.find({username:{ $in: [username, conf.GENERAL] }},(err,tag)=>{
         if(err){
             return res.status(500).send({message:`Error al realizar la busqueda de la etiqueta ${err}`})
         }
