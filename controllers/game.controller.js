@@ -35,7 +35,7 @@ function getGamesByUsername(req,res){
                 }else{
                     res.status(200).send(games);
                 }
-            }).sort({"entries.date": 1})
+            }).sort({"entries.date": -1})
     }else{
         Game.find({username:username},(err,games)=>{
             if(err){
@@ -46,7 +46,7 @@ function getGamesByUsername(req,res){
             }else{
                 res.status(200).send(games);
             }
-        }).sort({"entries.date": 1})
+        }).sort({"entries.date": -1})
     }
 
 }
