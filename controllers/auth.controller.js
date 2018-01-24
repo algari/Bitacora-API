@@ -35,7 +35,22 @@ function singIn(req,res){
     })
 }
 
+function updateUser(req,res){
+    console.log(req.body)
+    let user_id = req.params.user_id;
+    let update = req.body;
+
+    User.findByIdAndUpdate(user_id,update,(err,userUpdated)=>{
+        if(err){
+            return res.status(500).send({message:`Error al actulaizar el usuario  ${err}`})
+        }else{
+            res.status(200).send(userUpdated); 
+        }
+    })
+}
+
 module.exports={
     singIn,
-    singUp
+    singUp,
+    updateUser
 }

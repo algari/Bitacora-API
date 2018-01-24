@@ -50,6 +50,7 @@ api.get('/analysis/strategies',auth,analysisCtrl.strategiesAnalysis)
 //User
 api.post('/singup',auth,userCtrl.singUp)
 api.post('/users/login',userCtrl.singIn)
+api.put('/users/:user_id',auth ,userCtrl.updateUser)
 
 api.get('/private', auth,(req,res)=>{
     res.status(200).send({message:'Tiene acceso'})

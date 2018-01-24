@@ -11,13 +11,11 @@ const UserShema = new Shema({
     username: {type:String, unique:true},
     password:{type:String, select:false},
     email: {type:String,unique:true},
-    r:Number,
-    max_loss:Number,
-    max_loss_w:Number,
-    goal_w:Number,
+    max_weekly_loss:Number,
+    weekly_goal:Number,
     created_at: {type:Date, default:Date.now()},
     updated_at: {type:Date, default:Date.now()},
-    avatar:String
+    expires_at: {type:Date, default:Date.now()},
 })
 
 UserShema.pre('save',(next)=>{
